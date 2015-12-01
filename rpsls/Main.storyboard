@@ -192,10 +192,10 @@
                                         <animations/>
                                         <state key="normal" title="Rock"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwB-AZ-Fdy">
-                                        <rect key="frame" x="276" y="113" width="55" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwB-AZ-Fdy">
+                                        <rect key="frame" x="266" y="117" width="76" height="22"/>
                                         <animations/>
-                                        <state key="normal" title="Scissor"/>
+                                        <state key="normal" title="Scissor" image="Images/Scissor.png"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dvt-ZT-llZ">
                                         <rect key="frame" x="391" y="175" width="46" height="30"/>
@@ -316,4 +316,7 @@
             <point key="canvasLocation" x="997" y="351"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Images/Scissor.png" width="16" height="16"/>
+    </resources>
 </document>

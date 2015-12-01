@@ -141,5 +141,13 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Pictures\Background.jpg" />
+    <BundleResource Include="Resources\Images\Lizzard.png" />
+    <BundleResource Include="Resources\Images\Paper.png" />
+    <BundleResource Include="Resources\Images\Rock.png" />
+    <BundleResource Include="Resources\Images\Scissor.png" />
+    <BundleResource Include="Resources\Images\Spock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
   </ItemGroup>
 </Project>
