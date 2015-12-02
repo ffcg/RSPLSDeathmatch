@@ -7,16 +7,16 @@ using UIKit;
 
 namespace FFCG.RSPLS.DeathMatch.iOS
 {
-    [Register("UniversalView")]
-    public class UniversalView : UIView
+    [Register("StartView")]
+    public class StartView : UIView
     {
         private UIView _iconsContainerView;
-        public UniversalView()
+        public StartView()
         {
             Initialize();
         }
 
-        public UniversalView(RectangleF bounds) : base(bounds)
+        public StartView(RectangleF bounds) : base(bounds)
         {
             Initialize();
         }
@@ -54,11 +54,10 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             this.AddSubview(loginButtonContainerView);
 
             _iconsContainerView = new UIView();
-            _iconsContainerView.BackgroundColor = UIColor.DarkGray;
             _iconsContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
             this.AddSubview(_iconsContainerView);
             
-            AddIconsToContainer(_iconsContainerView);
+            AddIconsToContainer();
 
             var viewsDictionary = NSDictionary.FromObjectsAndKeys(
                 new NSObject[] { backgroundImageView, titleLabel, loginButtonContainerView, _iconsContainerView }, 
@@ -86,53 +85,47 @@ namespace FFCG.RSPLS.DeathMatch.iOS
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
-            AddIconsToContainer(_iconsContainerView);
+            LayoutIcons();
         }
-        
 
-        private void AddIconsToContainer(UIView containerView)
+        private void LayoutIcons()
         {
-            UIImage[] icons = null;
-            var count = containerView.Subviews.Length;
-            var hasSubViews = count > 0;
-            if (!hasSubViews)
-            {
-                icons = new[]
-                {
-                    UIImage.FromBundle("Rock.png"),
-                    UIImage.FromBundle("Paper.png"),
-                    UIImage.FromBundle("Scissor.png"),
-                    UIImage.FromBundle("Lizard.png"),
-                    UIImage.FromBundle("Spock.png"),
-                };
-                count = icons.Length;
-            }
+            var count = _iconsContainerView.Subviews.Length;
+            var w = _iconsContainerView.Bounds.Width;
+            var h = _iconsContainerView.Bounds.Height;
+            var t = 2 * Math.PI / (float)count;
 
-            // TODO: Observe size change on container view
+            var w2 = w / 3;
+            var r = w/2 - w2/2;
 
-            var w = containerView.Bounds.Width;
-            var h = containerView.Bounds.Height;
-            var t = 2*Math.PI/(float) count;
-
-            var w2 = w/4;
-            var h2 = w/4;
             for (var i = 0; i < count; i++)
             {
-                var x = w/2 + Math.Cos(t*i) * w2;
-                var y = h/2 + Math.Sin(t*i) * h2;
+                var x = w / 2 + Math.Cos(t * i) * r - w2/2;
+                var y = h / 2 + Math.Sin(t * i) * r - w2 / 2;
 
-                if (!hasSubViews)
-                {
-                    var imageView = new UIImageView(new CGRect(x, y, w2, h2));
-                    imageView.Image = icons[i];
-                    imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-                    containerView.AddSubview(imageView);
-                }
-                else
-                {
-                    var imageView = containerView.Subviews[i];
-                    imageView.Bounds = new CGRect(x, y, w2, h2);
-                }
+                var imageView = _iconsContainerView.Subviews[i];
+                imageView.Frame = new CGRect(x, y, w2, w2);
+            }
+        }
+
+        private void AddIconsToContainer()
+        {
+            var icons = new[]
+            {
+                UIImage.FromBundle("Rock.png"),
+                UIImage.FromBundle("Paper.png"),
+                UIImage.FromBundle("Scissor.png"),
+                UIImage.FromBundle("Lizard.png"),
+                UIImage.FromBundle("Spock.png"),
+            };
+            var count = icons.Length;
+
+            for (var i = 0; i < count; i++)
+            {
+                var imageView = new UIImageView(new CGRect(10*i, 10*i, 80, 80));
+                imageView.Image = icons[i];
+                imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+                _iconsContainerView.AddSubview(imageView);
             }
         }
 
@@ -141,6 +134,7 @@ namespace FFCG.RSPLS.DeathMatch.iOS
     [Register("StartViewController")]
     public class StartViewController : UIViewController
     {
+        
         public StartViewController()
         {
         }
@@ -155,11 +149,16 @@ namespace FFCG.RSPLS.DeathMatch.iOS
 
         public override void ViewDidLoad()
         {
-            View = new UniversalView();
+            View = new StartView();
 
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
         }
     }
 }
