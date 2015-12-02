@@ -11,6 +11,10 @@ namespace FFCG.RSPLS.DeathMatch.iOS
     public class StartView : UIView
     {
         private UIView _iconsContainerView;
+
+        private CGPoint[] _iconAnimationStart;
+        private CGPoint[] _iconAnimationEnd;
+
         public StartView()
         {
             Initialize();
@@ -97,14 +101,16 @@ namespace FFCG.RSPLS.DeathMatch.iOS
 
             var w2 = w / 3;
             var r = w/2 - w2/2;
+            var r2 = r*3;
 
             for (var i = 0; i < count; i++)
             {
-                var x = w / 2 + Math.Cos(t * i) * r - w2/2;
-                var y = h / 2 + Math.Sin(t * i) * r - w2 / 2;
+                _iconAnimationStart[i] = new CGPoint(w/2 + Math.Cos(t*i)*r2, h/2 + Math.Sin(t*i)*r2);
+                _iconAnimationEnd[i] = new CGPoint(w/2 + Math.Cos(t*i)*r, h/2 + Math.Sin(t*i)*r);
 
                 var imageView = _iconsContainerView.Subviews[i];
-                imageView.Frame = new CGRect(x, y, w2, w2);
+                imageView.Frame = new CGRect(0, 0, w2, w2);
+                imageView.Center = _iconAnimationStart[i];
             }
         }
 
@@ -120,15 +126,32 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             };
             var count = icons.Length;
 
+            _iconAnimationStart = new CGPoint[count];
+            _iconAnimationEnd = new CGPoint[count];
             for (var i = 0; i < count; i++)
             {
                 var imageView = new UIImageView(new CGRect(10*i, 10*i, 80, 80));
                 imageView.Image = icons[i];
                 imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
                 _iconsContainerView.AddSubview(imageView);
+
             }
         }
 
+        public void AnimateIconsIn()
+        {
+            UIView.Animate(0.25, 0, UIViewAnimationOptions.CurveEaseOut,
+                () => {
+                          for (var i = 0; i < _iconsContainerView.Subviews.Length; i++)
+                          {
+                              var iconView = _iconsContainerView.Subviews[i];
+                              iconView.Center = _iconAnimationEnd[i];
+                          }
+                },
+                () => {
+                }
+            );
+        }
     }
 
     [Register("StartViewController")]
@@ -159,6 +182,8 @@ namespace FFCG.RSPLS.DeathMatch.iOS
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
+
+            ((StartView) View).AnimateIconsIn();
         }
     }
 }
