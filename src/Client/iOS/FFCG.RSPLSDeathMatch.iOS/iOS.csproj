@@ -112,7 +112,7 @@
     <Content Include="Entitlements.plist" />
     <BundleResource Include="Resources\Background.jpg" />
     <BundleResource Include="Resources\Spock.png" />
-    <BundleResource Include="Resources\Lizzard.png" />
+    <BundleResource Include="Resources\Lizard.png" />
     <BundleResource Include="Resources\Paper.png" />
     <BundleResource Include="Resources\Rock.png" />
     <BundleResource Include="Resources\Scissor.png" />
