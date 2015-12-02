@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
+using FFCG.RSPLSDeathMatch.Server.DataObjects;
+using FFCG.RSPLSDeathMatch.Server.Models;
 using Microsoft.Azure.Mobile.Server;
-using rsplsdeathmatchService.DataObjects;
-using rsplsdeathmatchService.Models;
 
-namespace rsplsdeathmatchService.Controllers
+namespace FFCG.RSPLSDeathMatch.Server.Controllers
 {
     public class TodoItemController : TableController<TodoItem>
     {

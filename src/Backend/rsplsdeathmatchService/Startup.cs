@@ -1,9 +1,10 @@
+using FFCG.RSPLSDeathMatch.Server;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(rsplsdeathmatchService.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
-namespace rsplsdeathmatchService
+namespace FFCG.RSPLSDeathMatch.Server
 {
     public partial class Startup
     {

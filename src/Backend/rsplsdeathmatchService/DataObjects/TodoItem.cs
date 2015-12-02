@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 
-namespace rsplsdeathmatchService.DataObjects
+namespace FFCG.RSPLSDeathMatch.Server.DataObjects
 {
     public class TodoItem : EntityData
     {

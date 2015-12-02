@@ -1,11 +1,10 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using Microsoft.Azure.Mobile.Server;
+using FFCG.RSPLSDeathMatch.Server.DataObjects;
 using Microsoft.Azure.Mobile.Server.Tables;
-using rsplsdeathmatchService.DataObjects;
 
-namespace rsplsdeathmatchService.Models
+namespace FFCG.RSPLSDeathMatch.Server.Models
 {
     public class rsplsdeathmatchContext : DbContext
     {

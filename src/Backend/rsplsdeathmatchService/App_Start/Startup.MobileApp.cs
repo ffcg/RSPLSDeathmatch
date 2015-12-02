@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Web.Http;
+using FFCG.RSPLSDeathMatch.Server.DataObjects;
+using FFCG.RSPLSDeathMatch.Server.Models;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
-using rsplsdeathmatchService.DataObjects;
-using rsplsdeathmatchService.Models;
 using Owin;
 
-namespace rsplsdeathmatchService
+namespace FFCG.RSPLSDeathMatch.Server
 {
     public partial class Startup
     {
