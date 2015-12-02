@@ -87,6 +87,7 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="LobbyViewController.cs" />
     <Compile Include="Services\FacebookAuthenticationService.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

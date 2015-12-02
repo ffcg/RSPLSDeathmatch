@@ -10,8 +10,10 @@ namespace FFCG.RSPLS.DeathMatch.iOS
     [Register("StartView")]
     public class StartView : UIView
     {
-        private UIView _iconsContainerView;
+        private UIButton _iconsContainerView;
         private UIView _loginButtonContainerView;
+
+        public UIButton StartButton => _iconsContainerView;
 
         private CGPoint[] _iconAnimationStart;
         private CGPoint[] _iconAnimationEnd;
@@ -68,7 +70,8 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             _loginButtonContainerView.Alpha = 0.0f;
             this.AddSubview(_loginButtonContainerView);
 
-            _iconsContainerView = new UIView();
+            _iconsContainerView = new UIButton();
+            _iconsContainerView.UserInteractionEnabled = true;
             _iconsContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
             this.AddSubview(_iconsContainerView);
             
@@ -185,7 +188,7 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             for (var i = 0; i < _iconsContainerView.Subviews.Length; i++)
             {
                 var index = i;
-                UIView.Animate(0.15, 0.18 * (float)i, UIViewAnimationOptions.CurveEaseIn,
+                UIView.Animate(0.05, 0.08 * (float)i, UIViewAnimationOptions.CurveEaseIn,
                     () =>
                     {
                         var iconView = _iconsContainerView.Subviews[index];
@@ -296,12 +299,22 @@ namespace FFCG.RSPLS.DeathMatch.iOS
 
         public override void ViewDidLoad()
         {
-            View = new StartView();
-
             base.ViewDidLoad();
+
+            View = new StartView();
+            StartView.StartButton.TouchUpInside += StartButton_TouchUpInside;
 
             App.Facebook.LoggedIn += Facebook_LoggedIn;
             UpdateUserLogin();
+        }
+
+        private void StartButton_TouchUpInside(object sender, EventArgs e)
+        {
+            StartView.AnimateIconsOut(() =>
+            {
+                var lobbyViewController = new LobbyViewController();
+                this.PresentViewController(lobbyViewController, true, () => { });
+            });
         }
 
         private void UpdateUserLogin()
