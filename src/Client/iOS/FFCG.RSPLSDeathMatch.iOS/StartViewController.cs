@@ -1,12 +1,8 @@
-using System;
 using System.Drawing;
-
-using CoreFoundation;
-using CoreGraphics;
-using UIKit;
 using Foundation;
+using UIKit;
 
-namespace FFCG.RSPLSDeathMatch.iOS
+namespace FFCG.RSPLS.DeathMatch.iOS
 {
     [Register("UniversalView")]
     public class UniversalView : UIView

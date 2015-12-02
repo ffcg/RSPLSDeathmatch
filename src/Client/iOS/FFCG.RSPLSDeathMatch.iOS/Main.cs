@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace FFCG.RSPLSDeathMatch.iOS
+namespace FFCG.RSPLS.DeathMatch.iOS
 {
     public class Application
     {

@@ -6,9 +6,9 @@
     <ProjectGuid>{70CB0C67-CF6C-4070-BE69-8828F2388D56}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FFCG.RSPLSDeathMatch.iOS</RootNamespace>
+    <RootNamespace>FFCG.RSPLS.DeathMatch.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>FFCG.RSPLS.DeathMatch.iOS</AssemblyName>
+    <AssemblyName>FFCGRSPLSDeathMatchiOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
