@@ -11,6 +11,7 @@ namespace FFCG.RSPLS.DeathMatch.iOS
     public class StartView : UIView
     {
         private UIView _iconsContainerView;
+        private UIView _loginButtonContainerView;
 
         private CGPoint[] _iconAnimationStart;
         private CGPoint[] _iconAnimationEnd;
@@ -34,13 +35,22 @@ namespace FFCG.RSPLS.DeathMatch.iOS
 
             var titleLabel = new UILabel();
 
+
+            //foreach (var familyName in UIFont.FamilyNames)
+            //{
+            //    foreach (var font in UIFont.FontNamesForFamilyName(familyName))
+            //    {
+            //        Debug.WriteLine($"{familyName}\t{font}");
+            //    }
+            //}
+
             try
             {
                 titleLabel.Font = UIFont.FromName("Base 02", 40f);
             }
             catch (Exception)
             {
-                titleLabel.Font = UIFont.FromName("Helvetica-Bold", 40f);
+                titleLabel.Font = UIFont.FromName("Chalkduster", 40f);
             }
             titleLabel.AdjustsFontSizeToFitWidth = true; // gets smaller if it doesn't fit
             titleLabel.MinimumFontSize = 12f; // never gets smaller than this size
@@ -52,10 +62,10 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             titleLabel.TranslatesAutoresizingMaskIntoConstraints = false;
             this.AddSubview(titleLabel);
 
-            var loginButtonContainerView = new UIView();
-            loginButtonContainerView.BackgroundColor = UIColor.Blue;
-            loginButtonContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
-            this.AddSubview(loginButtonContainerView);
+            _loginButtonContainerView = new UIView();
+            //_loginButtonContainerView.BackgroundColor = UIColor.Blue;
+            _loginButtonContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
+            this.AddSubview(_loginButtonContainerView);
 
             _iconsContainerView = new UIView();
             _iconsContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
@@ -64,7 +74,7 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             AddIconsToContainer();
 
             var viewsDictionary = NSDictionary.FromObjectsAndKeys(
-                new NSObject[] { backgroundImageView, titleLabel, loginButtonContainerView, _iconsContainerView }, 
+                new NSObject[] { backgroundImageView, titleLabel, _loginButtonContainerView, _iconsContainerView }, 
                 new NSObject[] { new NSString("bg"), new NSString("title"), new NSString("login"), new NSString("icons") });
             this.AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|[bg]|",
                 NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
@@ -152,12 +162,76 @@ namespace FFCG.RSPLS.DeathMatch.iOS
                 }
             );
         }
+
+        public void AddLoginButton(UIView loginButton)
+        {
+            foreach (var subview in _loginButtonContainerView.Subviews)
+            {
+                subview.RemoveFromSuperview();
+            }
+            loginButton.TranslatesAutoresizingMaskIntoConstraints = false;
+            _loginButtonContainerView.AddSubview(loginButton);
+
+            var viewsDictionary = NSDictionary.FromObjectsAndKeys(
+                new NSObject[] { loginButton },
+                new NSObject[] { new NSString("login") });
+            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|-(>=0)-[login(48)]-(>=0)-|",
+                NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
+            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|-(>=0)-[login(48)]-(>=0)-|",
+                NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
+        }
+
+        public void AddLoginInfo(UIView profileImageView, string userName, UIView logoutButton)
+        {
+            foreach (var subview in _loginButtonContainerView.Subviews)
+            {
+                subview.RemoveFromSuperview();
+            }
+            profileImageView.TranslatesAutoresizingMaskIntoConstraints = false;
+            profileImageView.Layer.CornerRadius = 24;
+            profileImageView.Layer.MasksToBounds = true;
+            profileImageView.BackgroundColor = UIColor.Green;
+            
+            _loginButtonContainerView.AddSubview(profileImageView);
+
+            logoutButton.TranslatesAutoresizingMaskIntoConstraints = false;
+            _loginButtonContainerView.AddSubview(logoutButton);
+
+            var nameLabel = new UILabel();
+            nameLabel.Font = UIFont.FromName("Chalkduster", 20f);
+            nameLabel.MinimumFontSize = 12f; // never gets smaller than this size
+            nameLabel.LineBreakMode = UILineBreakMode.WordWrap;
+            nameLabel.Lines = 0; // 0 means unlimited
+            nameLabel.TextAlignment = UITextAlignment.Center;
+            nameLabel.TextColor = UIColor.White;
+            nameLabel.Text = userName;
+            //nameLabel.BackgroundColor = UIColor.Cyan;
+            nameLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+            _loginButtonContainerView.AddSubview(nameLabel);
+
+            var viewsDictionary = NSDictionary.FromObjectsAndKeys(
+                new NSObject[] { profileImageView, nameLabel, logoutButton },
+                new NSObject[] { new NSString("picture"), new NSString("name"), new NSString("logout") });
+            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|[picture(48)]-(8)-[name]-(24)-[logout(80)]|",
+                NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
+            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|-(>=0)-[picture(48)]-(>=0)-|",
+                NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
+            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|-(>=0)-[name(<=48)]-(>=0)-|",
+                NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
+            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|-(>=0)-[logout]-(>=0)-|",
+                NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
+
+            _loginButtonContainerView.AddConstraint(NSLayoutConstraint.Create(nameLabel, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, _loginButtonContainerView, NSLayoutAttribute.CenterY, 1, 0));
+            _loginButtonContainerView.AddConstraint(NSLayoutConstraint.Create(logoutButton, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, _loginButtonContainerView, NSLayoutAttribute.CenterY, 1, 0));
+        }
     }
 
     [Register("StartViewController")]
     public class StartViewController : UIViewController
     {
-        
+        private AppDelegate App => (AppDelegate) UIApplication.SharedApplication.Delegate;
+
+        private StartView StartView => (StartView) View;
         public StartViewController()
         {
         }
@@ -176,7 +250,29 @@ namespace FFCG.RSPLS.DeathMatch.iOS
 
             base.ViewDidLoad();
 
-            // Perform any additional setup after loading the view
+            App.Facebook.LoggedIn += Facebook_LoggedIn;
+            UpdateUserLogin();
+        }
+
+        private void UpdateUserLogin()
+        {
+            var facebookUser = App.Facebook.GetCurrentUser();
+            if (facebookUser != null)
+            {
+                var logoutButton = App.Facebook.CreateLoginButton();
+                var profileView = App.Facebook.CreateProfileView();
+                StartView.AddLoginInfo(profileView, facebookUser.UserName, logoutButton);
+            }
+            else
+            {
+                var loginButton = App.Facebook.CreateLoginButton();
+                StartView.AddLoginButton(loginButton);
+            }
+        }
+
+        private void Facebook_LoggedIn(object sender, Services.FacebookAuthenticationLoggedInEventArgs e)
+        {
+            UpdateUserLogin();
         }
 
         public override void ViewDidAppear(bool animated)

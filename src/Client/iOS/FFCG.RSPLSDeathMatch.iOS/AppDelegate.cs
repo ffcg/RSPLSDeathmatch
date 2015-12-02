@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using FFCG.RSPLS.DeathMatch.iOS.Services;
+using Foundation;
 using UIKit;
 
 namespace FFCG.RSPLS.DeathMatch.iOS
@@ -10,20 +11,23 @@ namespace FFCG.RSPLS.DeathMatch.iOS
     public class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
-
         public override UIWindow Window
         {
             get;
             set;
         }
 
+        public Services.FacebookAuthenticationService Facebook { get; private set; }
+
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+            Facebook = new FacebookAuthenticationService();
+
+
             // create a new window instance based on the screen size
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             var controller = new StartViewController();
-
             Window.RootViewController = controller;
 
             // make the window visible
