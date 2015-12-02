@@ -19,8 +19,15 @@ namespace FFCG.RSPLSDeathMatch.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            // Override point for customization after application launch.
-            // If not required for your application you can safely delete this method
+            // create a new window instance based on the screen size
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            var controller = new StartViewController();
+
+            Window.RootViewController = controller;
+
+            // make the window visible
+            Window.MakeKeyAndVisible();
 
             return true;
         }
