@@ -4,7 +4,7 @@ using System.Net;
 using FFCG.RSPLS.DeathMatch.ApiModel;
 
 namespace FFCG.RSPLS.DeathMatch.iOS.Services
-{
+{ 
     public class ServiceClient
     {
         private readonly string _baseUri;
