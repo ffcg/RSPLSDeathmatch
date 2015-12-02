@@ -123,6 +123,7 @@
     <BundleResource Include="Resources\Paper.png" />
     <BundleResource Include="Resources\Rock.png" />
     <BundleResource Include="Resources\Scissor.png" />
+    <BundleResource Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="facebookios">

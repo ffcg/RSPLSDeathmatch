@@ -35,8 +35,10 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             backgroundImageView.TranslatesAutoresizingMaskIntoConstraints = false;
             this.AddSubview(backgroundImageView);
 
-            var titleLabel = new UILabel();
-
+            var titleImageView = new UIImageView(UIImage.FromBundle("Logo.png"));
+            titleImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+            titleImageView.TranslatesAutoresizingMaskIntoConstraints = false;
+            this.AddSubview(titleImageView);
 
             //foreach (var familyName in UIFont.FamilyNames)
             //{
@@ -46,23 +48,24 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             //    }
             //}
 
-            try
-            {
-                titleLabel.Font = UIFont.FromName("Base 02", 40f);
-            }
-            catch (Exception)
-            {
-                titleLabel.Font = UIFont.FromName("Chalkduster", 40f);
-            }
-            titleLabel.AdjustsFontSizeToFitWidth = true; // gets smaller if it doesn't fit
-            titleLabel.MinimumFontSize = 12f; // never gets smaller than this size
-            titleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
-            titleLabel.Lines = 0; // 0 means unlimited
-            titleLabel.TextAlignment = UITextAlignment.Center;
-            titleLabel.TextColor = UIColor.White;
-            titleLabel.Text = "RPSLS DeathMatch";
-            titleLabel.TranslatesAutoresizingMaskIntoConstraints = false;
-            this.AddSubview(titleLabel);
+            //var titleLabel = new UILabel();
+            //try
+            //{
+            //    titleLabel.Font = UIFont.FromName("Base 02", 40f);
+            //}
+            //catch (Exception)
+            //{
+            //    titleLabel.Font = UIFont.FromName("Chalkduster", 40f);
+            //}
+            //titleLabel.AdjustsFontSizeToFitWidth = true; // gets smaller if it doesn't fit
+            //titleLabel.MinimumFontSize = 12f; // never gets smaller than this size
+            //titleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
+            //titleLabel.Lines = 0; // 0 means unlimited
+            //titleLabel.TextAlignment = UITextAlignment.Center;
+            //titleLabel.TextColor = UIColor.White;
+            //titleLabel.Text = "RPSLS DeathMatch";
+            //titleLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+            //this.AddSubview(titleLabel);
 
             _loginButtonContainerView = new UIView();
             //_loginButtonContainerView.BackgroundColor = UIColor.Blue;
@@ -78,7 +81,7 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             AddIconsToContainer();
 
             var viewsDictionary = NSDictionary.FromObjectsAndKeys(
-                new NSObject[] { backgroundImageView, titleLabel, _loginButtonContainerView, _iconsContainerView }, 
+                new NSObject[] { backgroundImageView, titleImageView, _loginButtonContainerView, _iconsContainerView }, 
                 new NSObject[] { new NSString("bg"), new NSString("title"), new NSString("login"), new NSString("icons") });
             this.AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|[bg]|",
                 NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
