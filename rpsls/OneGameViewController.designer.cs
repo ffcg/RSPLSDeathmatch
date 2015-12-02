@@ -47,29 +47,9 @@ namespace rpsls
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (GameView != null) {
-				GameView.Dispose ();
-				GameView = null;
-			}
-
-			if (ParticipantsCollection != null) {
-				ParticipantsCollection.Dispose ();
-				ParticipantsCollection = null;
-			}
-
-			if (KillCount != null) {
-				KillCount.Dispose ();
-				KillCount = null;
-			}
-
 			if (DeathCount != null) {
 				DeathCount.Dispose ();
 				DeathCount = null;
-			}
-
-			if (KillsText != null) {
-				KillsText.Dispose ();
-				KillsText = null;
 			}
 
 			if (DeathText != null) {
@@ -77,14 +57,24 @@ namespace rpsls
 				DeathText = null;
 			}
 
-			if (SpockButton != null) {
-				SpockButton.Dispose ();
-				SpockButton = null;
+			if (GameView != null) {
+				GameView.Dispose ();
+				GameView = null;
 			}
 
-			if (ScissorButton != null) {
-				ScissorButton.Dispose ();
-				ScissorButton = null;
+			if (KillCount != null) {
+				KillCount.Dispose ();
+				KillCount = null;
+			}
+
+			if (KillsText != null) {
+				KillsText.Dispose ();
+				KillsText = null;
+			}
+
+			if (LizzardButton != null) {
+				LizzardButton.Dispose ();
+				LizzardButton = null;
 			}
 
 			if (PaperButton != null) {
@@ -92,14 +82,24 @@ namespace rpsls
 				PaperButton = null;
 			}
 
+			if (ParticipantsCollection != null) {
+				ParticipantsCollection.Dispose ();
+				ParticipantsCollection = null;
+			}
+
 			if (RockButton != null) {
 				RockButton.Dispose ();
 				RockButton = null;
 			}
 
-			if (LizzardButton != null) {
-				LizzardButton.Dispose ();
-				LizzardButton = null;
+			if (ScissorButton != null) {
+				ScissorButton.Dispose ();
+				ScissorButton = null;
+			}
+
+			if (SpockButton != null) {
+				SpockButton.Dispose ();
+				SpockButton = null;
 			}
 		}
 	}
