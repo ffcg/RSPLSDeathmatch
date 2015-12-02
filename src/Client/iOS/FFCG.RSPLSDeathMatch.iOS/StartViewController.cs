@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using System.Drawing;
 using Foundation;
 using UIKit;
@@ -25,7 +27,15 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             this.AddSubview(backgroundImageView);
 
             var titleLabel = new UILabel();
-            titleLabel.Font = UIFont.FromName("Helvetica-Bold", 40f);
+
+            try
+            {
+                titleLabel.Font = UIFont.FromName("Base 02", 40f);
+            }
+            catch (Exception)
+            {
+                titleLabel.Font = UIFont.FromName("Helvetica-Bold", 40f);
+            }
             titleLabel.AdjustsFontSizeToFitWidth = true; // gets smaller if it doesn't fit
             titleLabel.MinimumFontSize = 12f; // never gets smaller than this size
             titleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
