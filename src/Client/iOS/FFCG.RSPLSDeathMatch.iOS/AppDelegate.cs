@@ -28,7 +28,8 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             var controller = new StartViewController();
-            Window.RootViewController = controller;
+			var ericController = new OneGameViewController ();
+			Window.RootViewController = ericController;
 
             // make the window visible
             Window.MakeKeyAndVisible();
