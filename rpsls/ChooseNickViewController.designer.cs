@@ -13,6 +13,9 @@ namespace rpsls
 	partial class ChooseNickViewController
 	{
 		[Outlet]
+		UIKit.UILabel ChooseNameLabel { get; set; }
+
+		[Outlet]
 		UIKit.UITextField NickTextField { get; set; }
 
 		[Outlet]
@@ -20,14 +23,19 @@ namespace rpsls
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (NickTextField != null) {
+				NickTextField.Dispose ();
+				NickTextField = null;
+			}
+
 			if (StartGameButton != null) {
 				StartGameButton.Dispose ();
 				StartGameButton = null;
 			}
 
-			if (NickTextField != null) {
-				NickTextField.Dispose ();
-				NickTextField = null;
+			if (ChooseNameLabel != null) {
+				ChooseNameLabel.Dispose ();
+				ChooseNameLabel = null;
 			}
 		}
 	}

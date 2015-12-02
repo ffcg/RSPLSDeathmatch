@@ -107,10 +107,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="ChooseGameViewController.cs" />
     <Compile Include="ChooseGameViewController.designer.cs">
       <DependentUpon>ChooseGameViewController.cs</DependentUpon>
@@ -131,6 +127,10 @@
     <Compile Include="OneGameViewController.designer.cs">
       <DependentUpon>OneGameViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="FirstPageViewController.cs" />
+    <Compile Include="FirstPageViewController.designer.cs">
+      <DependentUpon>FirstPageViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -140,6 +140,13 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Pictures\Background.jpg" />
+    <BundleResource Include="Pictures\Background.jpg" />
+    <BundleResource Include="Resources\fonts\death.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pictures\" />
+    <Folder Include="Resources\fonts\" />
   </ItemGroup>
 </Project>

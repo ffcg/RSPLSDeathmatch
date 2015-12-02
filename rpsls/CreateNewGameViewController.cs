@@ -19,12 +19,12 @@ namespace rpsls
 
 			CreateNewGameButton.TouchUpInside += (sender, e) => {
 
-				if (NewGameName.Text != null){
+				if (NewGameName.Text != ""){
 					PerformSegue("JumpToNewGame", this);
 				}
 			};
 
-			//View.BackgroundColor = UIColor.FromPatternImage(UIImage.FromFile("Background.jpg"));
+			View.BackgroundColor = UIColor.FromPatternImage(UIImage.FromFile("Pictures/Background.jpg"));
 		}
 	}
 }

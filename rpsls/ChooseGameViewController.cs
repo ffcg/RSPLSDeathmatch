@@ -16,6 +16,9 @@ namespace rpsls
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+
+			View.BackgroundColor = UIColor.FromPatternImage(UIImage.FromFile("Pictures/Background.jpg"));
+
 		}
 	}
 }

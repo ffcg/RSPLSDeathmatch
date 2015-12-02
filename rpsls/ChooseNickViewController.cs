@@ -22,10 +22,18 @@ namespace rpsls
 
 			StartGameButton.TouchUpInside += (sender, e) => {
 
-				if (NickTextField.Text != null){
+				if (NickTextField.Text != ""){
 					PerformSegue("JumpToListOfGames", this);
 				}
 			};
+
+			ChooseNameLabel.TextColor = UIColor.Red;
+
+			StartGameButton.TintColor = UIColor.Red;
+
+
+			View.BackgroundColor = UIColor.FromPatternImage(UIImage.FromFile("Pictures/Background.jpg"));
+
 		}
 			
 	}
