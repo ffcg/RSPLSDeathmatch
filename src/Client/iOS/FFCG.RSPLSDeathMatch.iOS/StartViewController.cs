@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using CoreGraphics;
 using Foundation;
 using UIKit;
 
@@ -9,6 +10,7 @@ namespace FFCG.RSPLS.DeathMatch.iOS
     [Register("UniversalView")]
     public class UniversalView : UIView
     {
+        private UIView _iconsContainerView;
         public UniversalView()
         {
             Initialize();
@@ -51,13 +53,15 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             loginButtonContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
             this.AddSubview(loginButtonContainerView);
 
-            var iconsContainerView = new UIView();
-            iconsContainerView.BackgroundColor = UIColor.DarkGray;
-            iconsContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
-            this.AddSubview(iconsContainerView);
+            _iconsContainerView = new UIView();
+            _iconsContainerView.BackgroundColor = UIColor.DarkGray;
+            _iconsContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
+            this.AddSubview(_iconsContainerView);
+            
+            AddIconsToContainer(_iconsContainerView);
 
             var viewsDictionary = NSDictionary.FromObjectsAndKeys(
-                new NSObject[] { backgroundImageView, titleLabel, loginButtonContainerView, iconsContainerView}, 
+                new NSObject[] { backgroundImageView, titleLabel, loginButtonContainerView, _iconsContainerView }, 
                 new NSObject[] { new NSString("bg"), new NSString("title"), new NSString("login"), new NSString("icons") });
             this.AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|[bg]|",
                 NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
@@ -71,13 +75,67 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             this.AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|-(>=24)-[icons]-(>=24)-|",
                 NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
 
-            this.AddConstraint(NSLayoutConstraint.Create(iconsContainerView, NSLayoutAttribute.Width,
+            this.AddConstraint(NSLayoutConstraint.Create(_iconsContainerView, NSLayoutAttribute.Width,
                 NSLayoutRelation.Equal, this, NSLayoutAttribute.Width, 1, -48));
-            this.AddConstraint(NSLayoutConstraint.Create(iconsContainerView, NSLayoutAttribute.Height,
-                NSLayoutRelation.Equal, iconsContainerView, NSLayoutAttribute.Width, 1, 0));
+            this.AddConstraint(NSLayoutConstraint.Create(_iconsContainerView, NSLayoutAttribute.Height,
+                NSLayoutRelation.Equal, _iconsContainerView, NSLayoutAttribute.Width, 1, 0));
 
             this.AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|-(>=24,<=48)-[icons]-(>=24)-[login(48)]-(24)-[title(96)]-(>=24,<=48)-|", 0, new NSDictionary(), viewsDictionary));
         }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+            AddIconsToContainer(_iconsContainerView);
+        }
+        
+
+        private void AddIconsToContainer(UIView containerView)
+        {
+            UIImage[] icons = null;
+            var count = containerView.Subviews.Length;
+            var hasSubViews = count > 0;
+            if (!hasSubViews)
+            {
+                icons = new[]
+                {
+                    UIImage.FromBundle("Rock.png"),
+                    UIImage.FromBundle("Paper.png"),
+                    UIImage.FromBundle("Scissor.png"),
+                    UIImage.FromBundle("Lizard.png"),
+                    UIImage.FromBundle("Spock.png"),
+                };
+                count = icons.Length;
+            }
+
+            // TODO: Observe size change on container view
+
+            var w = containerView.Bounds.Width;
+            var h = containerView.Bounds.Height;
+            var t = 2*Math.PI/(float) count;
+
+            var w2 = w/4;
+            var h2 = w/4;
+            for (var i = 0; i < count; i++)
+            {
+                var x = w/2 + Math.Cos(t*i) * w2;
+                var y = h/2 + Math.Sin(t*i) * h2;
+
+                if (!hasSubViews)
+                {
+                    var imageView = new UIImageView(new CGRect(x, y, w2, h2));
+                    imageView.Image = icons[i];
+                    imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+                    containerView.AddSubview(imageView);
+                }
+                else
+                {
+                    var imageView = containerView.Subviews[i];
+                    imageView.Bounds = new CGRect(x, y, w2, h2);
+                }
+            }
+        }
+
     }
 
     [Register("StartViewController")]
