@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FFCG.RSPLSDeathMatch.Server</RootNamespace>
-    <AssemblyName>FFCG.RSPLSDeathMatch.Server</AssemblyName>
+    <AssemblyName>FFCG.RSPLS.DeathMatch.Server</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
