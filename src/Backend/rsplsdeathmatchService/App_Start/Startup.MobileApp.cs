@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
+﻿using System.Configuration;
 using System.Web.Http;
-using FFCG.RSPLSDeathMatch.Server.DataObjects;
-using FFCG.RSPLSDeathMatch.Server.Models;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
@@ -22,11 +17,17 @@ namespace FFCG.RSPLSDeathMatch.Server
             config.EnableSystemDiagnosticsTracing();
 
             new MobileAppConfiguration()
-                .UseDefaultConfiguration()
+                .AddMobileAppHomeController() // from the Home package
+                .MapApiControllers()
+                //.AddTables(                               // from the Tables package
+                //    new MobileAppTableConfiguration()
+                //        .MapTableControllers()
+                //        .AddEntityFramework()     // from the Entity package
+                //    )
+                //.AddAppServiceAuthentication()            // from the Authentication package
+                .AddPushNotifications() // from the Notifications package
+                //.MapLegacyCrossDomainController()         // from the CrossDomain package
                 .ApplyTo(config);
-
-            // Use Entity Framework Code First to create database tables based on your DbContext
-            Database.SetInitializer(new rsplsdeathmatchInitializer());
 
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
             // Database.SetInitializer<rsplsdeathmatchContext>(null);
@@ -47,25 +48,6 @@ namespace FFCG.RSPLSDeathMatch.Server
             }
             app.UseWebApi(config);
         }
-    }
-
-    public class rsplsdeathmatchInitializer : CreateDatabaseIfNotExists<rsplsdeathmatchContext>
-    {
-        protected override void Seed(rsplsdeathmatchContext context)
-        {
-            List<TodoItem> todoItems = new List<TodoItem>
-            {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
-            };
-
-            foreach (TodoItem todoItem in todoItems)
-            {
-                context.Set<TodoItem>().Add(todoItem);
-            }
-
-            base.Seed(context);
-        }
-    }
+    } 
 }
 
