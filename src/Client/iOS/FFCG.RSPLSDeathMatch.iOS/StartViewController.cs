@@ -65,6 +65,7 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             _loginButtonContainerView = new UIView();
             //_loginButtonContainerView.BackgroundColor = UIColor.Blue;
             _loginButtonContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
+            _loginButtonContainerView.Alpha = 0.0f;
             this.AddSubview(_loginButtonContainerView);
 
             _iconsContainerView = new UIView();
@@ -111,7 +112,7 @@ namespace FFCG.RSPLS.DeathMatch.iOS
 
             var w2 = w / 3;
             var r = w/2 - w2/2;
-            var r2 = r*3;
+            var r2 = r*4;
 
             for (var i = 0; i < count; i++)
             {
@@ -121,6 +122,9 @@ namespace FFCG.RSPLS.DeathMatch.iOS
                 var imageView = _iconsContainerView.Subviews[i];
                 imageView.Frame = new CGRect(0, 0, w2, w2);
                 imageView.Center = _iconAnimationStart[i];
+                imageView.Transform = CGAffineTransform.MakeScale(2.0f, 2.0f);
+                imageView.Alpha = 0.0f;
+
             }
         }
 
@@ -150,17 +154,63 @@ namespace FFCG.RSPLS.DeathMatch.iOS
 
         public void AnimateIconsIn()
         {
-            UIView.Animate(0.25, 0, UIViewAnimationOptions.CurveEaseOut,
-                () => {
-                          for (var i = 0; i < _iconsContainerView.Subviews.Length; i++)
-                          {
-                              var iconView = _iconsContainerView.Subviews[i];
-                              iconView.Center = _iconAnimationEnd[i];
-                          }
+            var count = 0;
+            for (var i = 0; i < _iconsContainerView.Subviews.Length; i++)
+            {
+                var index = i;
+                UIView.Animate(0.15, 0.18*(float) i, UIViewAnimationOptions.CurveEaseIn,
+                    () =>
+                    {
+                        var iconView = _iconsContainerView.Subviews[index];
+                        iconView.Center = _iconAnimationEnd[index];
+                        iconView.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
+                        iconView.Alpha = 1.0f;
+                    },
+                    () => {}
+                    );
+            }
+            var delay = 0.15 * ((float)_loginButtonContainerView.Subviews.Length + 1.0f);
+            UIView.Animate(0.15, delay, UIViewAnimationOptions.CurveEaseIn,
+                () =>
+                {
+                    _loginButtonContainerView.Alpha = 1.0f;
                 },
-                () => {
-                }
-            );
+                () => { }
+                );
+        }
+
+        public void AnimateIconsOut(Action completed)
+        {
+            var count = 0;
+            for (var i = 0; i < _iconsContainerView.Subviews.Length; i++)
+            {
+                var index = i;
+                UIView.Animate(0.15, 0.18 * (float)i, UIViewAnimationOptions.CurveEaseIn,
+                    () =>
+                    {
+                        var iconView = _iconsContainerView.Subviews[index];
+                        iconView.Center = _iconAnimationStart[index];
+                        iconView.Transform = CGAffineTransform.MakeScale(2.0f, 2.0f);
+                        iconView.Alpha = 0.0f;
+                    },
+                    () =>
+                    {
+                        count++;
+                        if (count == _iconsContainerView.Subviews.Length)
+                        {
+                            completed?.Invoke();
+                        }
+                    }
+                    );
+            }
+            var delay = 0.15 * ((float)_loginButtonContainerView.Subviews.Length + 1.0f);
+            UIView.Animate(0.35, delay, UIViewAnimationOptions.CurveEaseIn,
+                () =>
+                {
+                    _loginButtonContainerView.Alpha = 1.0f;
+                },
+                () => { }
+                );
         }
 
         public void AddLoginButton(UIView loginButton)
