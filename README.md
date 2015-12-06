@@ -4,6 +4,8 @@ Rock Scissor Paper Lizard Spock Deathmatch!
 ## Install and Run
 Install must be done with a Windows OS, since we are using the specific Microsoft Packages for this project!
 
+    git clone https://github.com/ffcg/RSPLSDeathmatch
+
 Run the project through a build host using Xamarins Build Host, either on a same computer or a build host.
 
 ### PS
