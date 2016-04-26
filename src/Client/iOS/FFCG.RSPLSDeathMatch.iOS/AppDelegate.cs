@@ -20,20 +20,18 @@ namespace FFCG.RSPLS.DeathMatch.iOS
         public Services.FacebookAuthenticationService Facebook { get; private set; }
         public Services.ServiceClient Client { get; private set; }
 
+        public ApplicationFlowManager ApplicationFlowManager { get; private set; }
+        public PresentationManager PresentationManager { get; private set; } 
+
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             Facebook = new FacebookAuthenticationService();
             Client = new ServiceClient(@"https://rsplsdeathmatch.azurewebsites.net");
+            PresentationManager = new PresentationManager(this);
+            ApplicationFlowManager = new ApplicationFlowManager(PresentationManager);
 
-            // create a new window instance based on the screen size
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-            var controller = new StartViewController();
-            Window.RootViewController = controller;
-
-            // make the window visible
-            Window.MakeKeyAndVisible();
-
+            ApplicationFlowManager.Initialize();
+            
             return true;
         }
 

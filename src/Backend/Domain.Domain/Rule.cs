@@ -5,25 +5,19 @@ namespace FFCG.RSPLS.DeathMatch.Domain
 {
     public class Rule
     {
-        public static IEnumerable<Rule> DefaultRules
+        public static IEnumerable<Rule> DefaultRules => new Rule[]
         {
-            get
-            {
-                return new Rule[]
-                {
-                    new Rule(MoveType.Rock, MoveOutcomeType.Crushes, MoveType.Lizard),
-                    new Rule(MoveType.Lizard, MoveOutcomeType.Poisons, MoveType.Spock),
-                    new Rule(MoveType.Spock, MoveOutcomeType.Smashes, MoveType.Scissors),
-                    new Rule(MoveType.Scissors, MoveOutcomeType.Cuts, MoveType.Paper),
-                    new Rule(MoveType.Paper, MoveOutcomeType.Covers, MoveType.Rock),
-                    new Rule(MoveType.Rock, MoveOutcomeType.Crushes, MoveType.Scissors),
-                    new Rule(MoveType.Scissors, MoveOutcomeType.Decapitates, MoveType.Lizard),
-                    new Rule(MoveType.Lizard, MoveOutcomeType.Eats, MoveType.Paper),
-                    new Rule(MoveType.Paper, MoveOutcomeType.Disproves, MoveType.Spock),
-                    new Rule(MoveType.Spock, MoveOutcomeType.Vaporizes, MoveType.Rock)
-                };
-            }
-        } 
+            new Rule(MoveType.Rock, MoveOutcomeType.Crushes, MoveType.Lizard),
+            new Rule(MoveType.Lizard, MoveOutcomeType.Poisons, MoveType.Spock),
+            new Rule(MoveType.Spock, MoveOutcomeType.Smashes, MoveType.Scissors),
+            new Rule(MoveType.Scissors, MoveOutcomeType.Cuts, MoveType.Paper),
+            new Rule(MoveType.Paper, MoveOutcomeType.Covers, MoveType.Rock),
+            new Rule(MoveType.Rock, MoveOutcomeType.Crushes, MoveType.Scissors),
+            new Rule(MoveType.Scissors, MoveOutcomeType.Decapitates, MoveType.Lizard),
+            new Rule(MoveType.Lizard, MoveOutcomeType.Eats, MoveType.Paper),
+            new Rule(MoveType.Paper, MoveOutcomeType.Disproves, MoveType.Spock),
+            new Rule(MoveType.Spock, MoveOutcomeType.Vaporizes, MoveType.Rock)
+        };
 
         public Rule(MoveType move1, MoveOutcomeType outcome, MoveType move2)
         {

@@ -6,9 +6,9 @@
     <ProjectGuid>{70CB0C67-CF6C-4070-BE69-8828F2388D56}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FFCG.RSPLS.DeathMatch.iOS</RootNamespace>
+    <RootNamespace>FFCG.RSPLSDeathMatch.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>FFCGRSPLSDeathMatchiOS</AssemblyName>
+    <AssemblyName>FFCG.RSPLS.DeathMatch.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,34 +87,21 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="LobbyViewController.cs" />
-    <Compile Include="Services\FacebookAuthenticationService.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <None Include="Info.plist">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="GettingStarted.Xamarin" />
+    <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <BundleResource Include="Resources\Base 02.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </BundleResource>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\PresentationManager.cs" />
-    <Compile Include="Services\ServiceClient.cs" />
-    <Compile Include="StartViewController.cs" />
+    <Compile Include="ViewController.designer.cs">
+      <DependentUpon>ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController.cs" />
+    <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Facebook, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Facebook.iOS.4.5.1.0\lib\Xamarin.iOS10\Facebook.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -122,33 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
-    <BundleResource Include="Resources\Background.jpg" />
-    <BundleResource Include="Resources\Spock.png" />
-    <BundleResource Include="Resources\Lizard.png" />
-    <BundleResource Include="Resources\Paper.png" />
-    <BundleResource Include="Resources\Rock.png" />
-    <BundleResource Include="Resources\Scissor.png" />
-    <BundleResource Include="Resources\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <XamarinComponentReference Include="facebookios">
-      <Visible>False</Visible>
-      <Version>4.5.1</Version>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="json.net">
-      <Visible>False</Visible>
-      <Version>7.0.1</Version>
-    </XamarinComponentReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Backend\Domain.ApiModel\ApiModel.csproj">
-      <Project>{dfc3e92a-c811-4734-8b19-f50b5605118b}</Project>
-      <Name>ApiModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\FFCG.RSPLS.DeathMatch.Client.App.Shared\App.Shared.csproj">
-      <Project>{98c334cb-01e9-48e9-af87-b80778625e7e}</Project>
-      <Name>App.Shared</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

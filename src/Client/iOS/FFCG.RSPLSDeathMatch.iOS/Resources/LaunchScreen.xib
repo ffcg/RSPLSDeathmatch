@@ -17,7 +17,7 @@
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="20" y="439" width="441" height="21"/>
                     <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
-                    <color key="textColor" colorSpace="calibratedRGB" red="0.76078431372549016" green="0.086274509803921567" blue="0.086274509803921567" alpha="1"/>
+                    <color key="textColor" colorSpace="calibratedRGB" red="0.82352941176470584" green="0.403921568627451" blue="0.098039215686274508" alpha="1"/>
                     <nil key="highlightedColor"/>
                     <constraints>
                         <constraint id="22" firstItem="8ie-xW-0ye" firstAttribute="height" constant="21"/>
@@ -41,5 +41,12 @@
     </objects>
     <resources>
         <image name="Background.jpg" width="1920" height="1440"/>
+        <image name="Base 02.ttf" width="0" height="0"/>
+        <image name="Lizard.png" width="579" height="578"/>
+        <image name="Logo.png" width="778" height="271"/>
+        <image name="Paper.png" width="580" height="578"/>
+        <image name="Rock.png" width="579" height="578"/>
+        <image name="Scissor.png" width="578" height="578"/>
+        <image name="Spock.png" width="576" height="578"/>
     </resources>
 </document>

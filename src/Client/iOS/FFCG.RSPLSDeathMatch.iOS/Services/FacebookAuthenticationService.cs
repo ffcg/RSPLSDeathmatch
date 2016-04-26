@@ -34,6 +34,10 @@ namespace FFCG.RSPLS.DeathMatch.iOS.Services
 
         public FacebookAuthenticationService()
         {
+            Profile.EnableUpdatesOnAccessTokenChange(true);
+            Settings.AppID = "1701374563438405";
+            Settings.DisplayName = "RSPLS";
+
             Profile.Notifications.ObserveDidChange((sender, e) =>
             {
 

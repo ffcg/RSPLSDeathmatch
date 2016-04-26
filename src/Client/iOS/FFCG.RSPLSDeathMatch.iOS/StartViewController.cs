@@ -40,35 +40,9 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             titleImageView.TranslatesAutoresizingMaskIntoConstraints = false;
             this.AddSubview(titleImageView);
 
-            //foreach (var familyName in UIFont.FamilyNames)
-            //{
-            //    foreach (var font in UIFont.FontNamesForFamilyName(familyName))
-            //    {
-            //        Debug.WriteLine($"{familyName}\t{font}");
-            //    }
-            //}
-
-            //var titleLabel = new UILabel();
-            //try
-            //{
-            //    titleLabel.Font = UIFont.FromName("Base 02", 40f);
-            //}
-            //catch (Exception)
-            //{
-            //    titleLabel.Font = UIFont.FromName("Chalkduster", 40f);
-            //}
-            //titleLabel.AdjustsFontSizeToFitWidth = true; // gets smaller if it doesn't fit
-            //titleLabel.MinimumFontSize = 12f; // never gets smaller than this size
-            //titleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
-            //titleLabel.Lines = 0; // 0 means unlimited
-            //titleLabel.TextAlignment = UITextAlignment.Center;
-            //titleLabel.TextColor = UIColor.White;
-            //titleLabel.Text = "RPSLS DeathMatch";
-            //titleLabel.TranslatesAutoresizingMaskIntoConstraints = false;
-            //this.AddSubview(titleLabel);
-
+        
             _loginButtonContainerView = new UIView();
-            //_loginButtonContainerView.BackgroundColor = UIColor.Blue;
+            _loginButtonContainerView.BackgroundColor = UIColor.Blue;
             _loginButtonContainerView.TranslatesAutoresizingMaskIntoConstraints = false;
             _loginButtonContainerView.Alpha = 0.0f;
             this.AddSubview(_loginButtonContainerView);
@@ -215,7 +189,10 @@ namespace FFCG.RSPLS.DeathMatch.iOS
                 {
                     _loginButtonContainerView.Alpha = 1.0f;
                 },
-                () => { }
+                () =>
+                {
+                   
+                }
                 );
         }
 
@@ -231,9 +208,9 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             var viewsDictionary = NSDictionary.FromObjectsAndKeys(
                 new NSObject[] { loginButton },
                 new NSObject[] { new NSString("login") });
-            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|-(>=0)-[login(48)]-(>=0)-|",
+            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|[login]|",
                 NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
-            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|-(>=0)-[login(48)]-(>=0)-|",
+            _loginButtonContainerView.AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|-(>=0)-[login(>=48)]-(>=0)-|",
                 NSLayoutFormatOptions.DirectionLeadingToTrailing, new NSDictionary(), viewsDictionary));
         }
 
@@ -313,9 +290,9 @@ namespace FFCG.RSPLS.DeathMatch.iOS
 
         private void StartButton_TouchUpInside(object sender, EventArgs e)
         {
+            var lobbyViewController = new LobbyViewController();
             StartView.AnimateIconsOut(() =>
             {
-                var lobbyViewController = new LobbyViewController();
                 this.PresentViewController(lobbyViewController, true, () => { });
             });
         }
@@ -346,6 +323,13 @@ namespace FFCG.RSPLS.DeathMatch.iOS
             base.ViewDidAppear(animated);
 
             ((StartView) View).AnimateIconsIn();
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            StartView.AnimateIconsOut(() => { });
         }
     }
 }
